@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  if (user)
+    h1 Welcome #{user.username}
+    a(href="/logout") 
+      button Log out
+  else
+    h1 Log In
+    form(action="/login" method='post') 
+      label(for="username") Username
+      input(type="text" name='username')
+      label(for="password") Password
+      input(type="password" name='password')
+      button(type="submit") Log in
+    h1 OR
+    a(href="/signup") 
+      button Sign up
