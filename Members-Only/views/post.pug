@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h2=user
+    if user
+      h1 Create Post
+      form(method='post') 
+        label(for="title") Title
+        input(type="text" name='title')
+        label(for="content")
+        input(type="textarea" name='content')
+        button(type="submit") Post
+    else    
+      h1 Log in before posting 
+      a(href="/") 
+        button Login
+    if errors 
+        p=errors
+        each err in errors
+            p=err
+    

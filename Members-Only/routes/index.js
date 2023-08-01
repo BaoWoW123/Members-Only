@@ -4,14 +4,16 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
-const User = require("../db");
+const { User, Post } = require("../db");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { user: req.user });
+router.get("/", async function (req, res, next) {
+    const postArr = await Post.find()
+  res.render("index", { user: req.user, posts:postArr });
 });
 
 router.get("/signup", (req, res) => res.render("signup"));
+router.get("/post", (req, res) => res.render("post", {user: req.user}));
 router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
@@ -46,5 +48,22 @@ router.post(
     failureRedirect: "/",
   })
 );
+
+router.post('/post', async (req, res) => {
+    //check character string limit 
+    try {
+        const post = new Post({
+            user: req.user.username,
+            title: req.body.title,
+            content: req.body.content,
+            date: new Date()
+        })
+        const save = await post.save();
+        const postArr = await Post.find();
+        res.render('index', {user:req.user, posts:postArr})
+    } catch(err) {
+        res.render('post', {errors:err})
+    }
+})
 
 module.exports = router;

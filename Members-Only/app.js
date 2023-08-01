@@ -9,7 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("./db");
+const { User } = require("./db");
 var app = express();
 
 // view engine setup

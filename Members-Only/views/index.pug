@@ -1,8 +1,11 @@
 extends layout
 
 block content
+  h2=user
   if (user)
     h1 Welcome #{user.username}
+    a(href="/post") 
+      button Create Post
     a(href="/logout") 
       button Log out
   else
@@ -16,3 +19,14 @@ block content
     h1 OR
     a(href="/signup") 
       button Sign up
+  if posts
+    h1 Posts
+    ul 
+      each post in posts  
+        li  
+          h1=post.title 
+          hr 
+          p 
+            b #{post.user} 
+            | #{post.date}
+          p=post.content
