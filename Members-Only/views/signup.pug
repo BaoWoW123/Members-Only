@@ -7,6 +7,10 @@ block content
     input(type="text" name='username')
     label(for="password") Password
     input(type="password" name='password')
+    label(for="confirmPassword") Confirm password
+    input(type="password" name='confirmPassword')
     button(type="submit") Sign up
   if errors
-    p=errors
+    ul
+      each err in errors  
+        li=err.msg

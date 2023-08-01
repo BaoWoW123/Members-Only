@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  h2=user
   if (user)
     h1 Welcome #{user.username}
     a(href="/post") 
@@ -19,7 +18,7 @@ block content
     h1 OR
     a(href="/signup") 
       button Sign up
-  if posts
+  if posts && user
     h1 Posts
     ul 
       each post in posts  
@@ -30,3 +29,15 @@ block content
             b #{post.user} 
             | #{post.date}
           p=post.content
+  else
+    if posts
+      h1 Posts
+      ul 
+        each post,idx in posts  
+          li
+            h1=post.title 
+            hr 
+            p 
+              b #{idx} 
+              | #{post.date}
+            p=post.content

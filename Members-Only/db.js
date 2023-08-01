@@ -13,7 +13,7 @@ const User = mongoose.model("User", new Schema({
 
 const Post = mongoose.model('Post', new Schema({
     title: {type:String, required:true, maxlength:50},
-    content: {type:String, required:true, maxlength:500},
+    content: {type:String, required:true, minlength:5, maxlength:500},
     date:  {type:Date, required:true},
     user:  {type:String, required:true},
 }, {collection: 'Members_Only_Posts'}))
