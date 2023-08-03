@@ -1,8 +1,96 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightgray;
+  margin:auto;
 }
 
 a {
   color: #00B7FF;
+}
+
+button {
+  font-size: large;
+}
+
+form {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:10px;
+}
+input {
+  padding:5px
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+li {
+  background-color: white;
+  list-style-type: none;
+  width: 30vw;
+  padding: 20px;
+}
+li>div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  margin: 0;
+  top: 10px;
+  left: 10px;
+  gap: 20px;
+  background-color:white;
+  padding:20px;
+}
+
+h1 {
+  margin:0;
+}
+.posts>h1 {
+  padding:20px;
+}
+
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+}
+
+.signup {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  padding:20px;
+  gap:20px;
+}
+
+.createPost {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+  padding:20px;
+}
+
+.postText {
+  width:20vw;
+  height:20vh;
+  text-align: left;
+  vertical-align:top;
+  font-size: large;
+  padding:10px;
 }

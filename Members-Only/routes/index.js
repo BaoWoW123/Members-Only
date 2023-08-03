@@ -9,7 +9,7 @@ const { check, validationResult } = require("express-validator");
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
-  const postArr = await Post.find();
+  const postArr = await Post.find().sort({date:-1});
   res.render("index", { user: req.user, posts: postArr });
 });
 
@@ -55,7 +55,8 @@ router.post(
           password: hashedPw,
         });
         const save = await user.save();
-        res.render("index");
+        const postArr = await Post.find().sort({date:-1});
+        res.render("index", { user: req.user, posts: postArr });
       });
     } catch (err) {
       return next(err);
@@ -95,7 +96,7 @@ router.post(
         date: new Date(),
       });
       const save = await post.save();
-      const postArr = await Post.find();
+      const postArr = await Post.find().sort({date:-1});
       res.render("index", { user: req.user, posts: postArr });
     } catch (err) {
         //change error format to display in view correctly
