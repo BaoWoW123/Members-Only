@@ -2,8 +2,11 @@ extends layout
 
 block content
   if (user)
-    .account
+    .account.vip
       h1 Welcome #{user.username}
+      if (user.vip == undefined || user.vip == false) 
+        a(href="/apply") 
+          button Apply for VIP Access
       a(href="/post") 
         button Create Post
       a(href="/logout") 
@@ -19,19 +22,34 @@ block content
         button(type="submit") Log in
       a(href="/signup") 
         button Sign up
-  if posts && user
-    .posts
-      h1 Posts
-      ul 
-        each post in posts  
-          li  
-            div 
-              h1=post.title 
-              | #{post.formatDate}
-            b #{post.user} 
-            hr 
-            p=post.content
-  else
+  if (user)
+    if(user.vip == true)   
+      .posts
+        if posts
+          h1 Posts
+          ul 
+            each post in posts  
+              li  
+                div 
+                  h1=post.title 
+                  | #{post.formatDate}
+                b #{post.user} 
+                hr 
+                p=post.content
+    else 
+      .posts
+        if posts
+          h1 Posts
+          ul 
+            each post in posts  
+              li
+                div 
+                  h1=post.title 
+                  | #{post.formatDate}
+                b  
+                hr 
+                p=post.content     
+  else 
     .posts
       if posts
         h1 Posts
@@ -43,4 +61,4 @@ block content
                 | #{post.formatDate}
               b  
               hr 
-              p=post.content
+              p=post.content     

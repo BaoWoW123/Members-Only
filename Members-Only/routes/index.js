@@ -15,6 +15,7 @@ router.get("/", async function (req, res, next) {
 
 router.get("/signup", (req, res) => res.render("signup"));
 router.get("/post", (req, res) => res.render("post", { user: req.user }));
+router.get("/apply", (req, res) => res.render("apply", { user: req.user }));
 router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
@@ -61,6 +62,7 @@ router.post(
         const user = new User({
           username: req.body.username,
           password: hashedPw,
+          vip: false
         });
         const save = await user.save();
         const postArr = await Post.find().sort({date:-1});
@@ -112,5 +114,21 @@ router.post(
     }
   }
 );
+
+router.post("/apply", async (req, res) => {
+    let input = req.body.applyInput
+    if (input.length > 0) return res.redirect('/')
+    try {
+        const user = await User.findOneAndUpdate({username: req.user.username}, {vip:true}, {new:true})
+        if (!user) res.send('User not found')
+          else {
+            const posts = await Post.find().sort({date:-1})
+            res.render('index', {user: req.user, posts:posts})
+          }
+    } catch(err) {
+        res.redirect('/')
+    }
+});
+
 
 module.exports = router;

@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    .signup
+      h1 Solve to Become a Member
+      form(action="" method='post') 
+        label(for="applyInput")
+          h2 Enter what you see
+        input(type="text" name='applyInput')
+        button Sign up 
+      if errors
+        ul
+        each err in errors  
+            li=err.msg
+
+    script.
+        setTimeout(()=> {
+            let input = document.querySelector('input[name="applyInput"]').value
+            if (input === '') document.querySelector('.applyBtn').click();
+        }, 15000)

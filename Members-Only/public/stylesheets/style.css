@@ -94,3 +94,7 @@ h1 {
   font-size: large;
   padding:10px;
 }
+
+.vip {
+  border:5px solid dodgerblue
+}
